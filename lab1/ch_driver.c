@@ -33,10 +33,10 @@ size_t count_spaces(char* str, size_t size){
     return  count;
 }
 
-static ssize_t proc_write(struct file *f, const char __user *buf, size_t len, loff_t *off){
+static ssize_t ch_write(struct file *f, const char __user *buf, size_t len, loff_t *off){
     size_t count = 0;
     char str[BUFFER_SIZE] = {0};
-    printk(KERN_INFO "/proc writing began\n");
+    printk(KERN_INFO "/dev writing began\n");
     for(;;){
         if(BUFFER_SIZE >= len){
             if(copy_from_user(str, buf, len) != 0){
@@ -57,7 +57,7 @@ static ssize_t proc_write(struct file *f, const char __user *buf, size_t len, lo
     }
     spaces[writes] = count;
     writes++;
-    printk(KERN_INFO "/proc writing succeeded\n");
+    printk(KERN_INFO "/dev writing succeeded\n");
     return len;
 }
 
@@ -113,13 +113,13 @@ static ssize_t ch_read(struct file *f, char __user *buf, size_t len, loff_t *off
 
 static const struct file_operations proc_fops = {
         .owner = THIS_MODULE,
-        .read = proc_read,
-        .write = proc_write
+        .read = proc_read
 };
 
 static const struct file_operations ch_fops = {
         .owner = THIS_MODULE,
-        .read = ch_read
+        .read = ch_read,
+        .write = ch_write
 };
 
 static int __init ch_drv_init(void){
@@ -148,7 +148,7 @@ static int __init ch_drv_init(void){
         unregister_chrdev_region(first, 1);
         return -EFAULT;
     }
-    if((in_proc = proc_create("var4", 0666, NULL, &proc_fops)) == NULL){
+    if((in_proc = proc_create("var4", 0444, NULL, &proc_fops)) == NULL){
         printk(KERN_ERR "Failed creating proc entry");
         cdev_del(&c_dev);
         device_destroy(cl, first);
