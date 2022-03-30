@@ -36,6 +36,8 @@ size_t count_spaces(char* str, size_t size){
 static ssize_t ch_write(struct file *f, const char __user *buf, size_t len, loff_t *off){
     size_t count = 0;
     char str[BUFFER_SIZE] = {0};
+    if(writes >= BUFFER_SIZE - 1)
+        writes = 0;
     printk(KERN_INFO "/dev writing began\n");
     for(;;){
         if(BUFFER_SIZE >= len){
