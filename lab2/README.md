@@ -31,18 +31,18 @@
 - Копирование проводилось при помощи команды `rsync --progress \<source\> \<dest\>`
 - Для тестирования был использован файл размером 9 MiB
 ### Результат
-mydisk1->mydisk2: 175.86MB/s  
-mydisk1->mydisk3: 179.38MB/s  
+mydisk1->mydisk2: __175.86MB/s__  
+mydisk1->mydisk3: __179.38MB/s__  
 
-mydisk2->mydisk1: 172.48MB/s  
-mydisk2->mydisk3: 183.04MB/s 
+mydisk2->mydisk1: __172.48MB/s__  
+mydisk2->mydisk3: __183.04MB/s__ 
 
-mydisk3->mydisk1: 190.82MB/s  
-mydisk3->mydisk2: 175.86MB/s 
+mydisk3->mydisk1: __190.82MB/s__  
+mydisk3->mydisk2: __175.86MB/s__ 
 
-mydisk1->sda: 194.97MB/s  
-mydisk2->sda: 190.82MB/s  
-mydisk3->sda: 186.85MB/s  
+mydisk1->sda: __194.97MB/s__  
+mydisk2->sda: __190.82MB/s__  
+mydisk3->sda: __186.85MB/s__  
 
-- Средняя скорость передачи между разделами на диске: 179.57 MB/s  
-- Средняя скорость передачи на с mydisk на sda: 190.88 MB/s
+- Средняя скорость передачи между разделами на диске: __179.57 MB/s__  
+- Средняя скорость передачи на с mydisk на sda: __190.88 MB/s__
